@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-from chat import get_completion_from_message
+from chat import get_completion_from_messages,collect_messages_text
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -16,7 +16,8 @@ def home(request: Request):
 @app.post("/chat")
 async def chat(message: Message):
     user_message = message.content
-    response = get_completion_from_message(user_message)
+    response = collect_messages_text(user_message)
+
     return {"message": response}
 
 if __name__ == "__main__":
