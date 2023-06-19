@@ -1,0 +1,75 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chatbot</title>
+    </head>
+    <body>
+        <style>
+            body {
+                font-family: Helvetica, Arial, sans-serif;
+                background: #e5e5e5;
+            }
+        
+            #chatbot {
+                width: 95%;
+                margin: 10px auto 10px auto;
+                background: #FFF;
+                padding: 20px;
+                border-radius: 5px;
+            }
+        
+            #chatbot h1 {
+                font-weight: normal;
+            }
+        
+            #chatbot .output {
+                background: #FFF;
+                padding: 20px;
+                margin: 0 0 10px 0;
+                min-height: 60px;
+            }
+        
+            #chatbot .output div {
+                padding: 10px;
+            }
+        
+            #chatbot .input {
+                position: relative;
+            }
+        
+            #chatbot #chatbot-input {
+                width: 100%;
+                padding: 10px;
+                margin: 0 0 10px 0;
+                resize: none;
+                border: 1px solid #DDD;
+                border-radius: 5px;
+            }
+        
+            #chatbot .submit {
+                position: absolute;
+                bottom: 15px;
+                right: 25px;
+            }
+        </style>
+
+        <div id="chatbot">
+            <h1>Chatbot</h1>
+            <div class="output">
+                <div>Hello there, I'm your chatbot.</div>
+            </div>
+            <p>Type a message to talk to me:</p>
+
+            <div class="input">
+                <textarea id="chatbot-input" placeholder="Enter your message here..."></textarea> 
+                <button class="submit">Submit</button> 
+            </div>
+        </div>
+
+        <script src="static/app.js">
+            
+        </script>
+    </body>
+</html> 
+
