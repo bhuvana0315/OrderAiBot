@@ -1,32 +1,24 @@
-
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
-from chat import get_completion_from_messages
-from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-
-from chat import get_completion_from_messages
+from chat import get_completion_from_message
 
 app = FastAPI()
-app.mount("/static",StaticFiles(directory="static"),name="static")
+templates = Jinja2Templates(directory="templates")
 
 class Message(BaseModel):
-    message: str
+    content: str
 
 @app.get("/")
-def main():
-    with open("templates/index.html") as f:
-        html_content = f.read()
-    return HTMLResponse(content=html_content)
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-# @app.post("/completion")
-# async def chat_completion(message: str) -> str:
-#     response = get_completion_from_messages([message])
-#     return response
+@app.post("/chat")
+async def chat(message: Message):
+    user_message = message.content
+    response = get_completion_from_message(user_message)
+    return {"message": response}
 
-@app.post("/completion")
-async def chat_completion(message: Message) -> str:
-    messages = [m.content for m in message.messages]
-    print(messages)
-    response = get_completion_from_messages(messages)
-    return {"choices": [{"message": {"content": response}}]}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, port=8000)

@@ -1,75 +1,68 @@
-
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Chatbot</title>
-    </head>
-    <body>
-        <style>
-            body {
-                font-family: Helvetica, Arial, sans-serif;
-                background: #e5e5e5;
-            }
-        
-            #chatbot {
-                width: 95%;
-                margin: 10px auto 10px auto;
-                background: #FFF;
-                padding: 20px;
-                border-radius: 5px;
-            }
-        
-            #chatbot h1 {
-                font-weight: normal;
-            }
-        
-            #chatbot .output {
-                background: #FFF;
-                padding: 20px;
-                margin: 0 0 10px 0;
-                min-height: 60px;
-            }
-        
-            #chatbot .output div {
-                padding: 10px;
-            }
-        
-            #chatbot .input {
-                position: relative;
-            }
-        
-            #chatbot #chatbot-input {
-                width: 100%;
-                padding: 10px;
-                margin: 0 0 10px 0;
-                resize: none;
-                border: 1px solid #DDD;
-                border-radius: 5px;
-            }
-        
-            #chatbot .submit {
-                position: absolute;
-                bottom: 15px;
-                right: 25px;
-            }
-        </style>
+<head>
+    <title>Chat Bot</title>
+    <style>
+        #chat-container {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        #user-message {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat Bot</h1>
+    <div id="chat-container"></div>
+    <input type="text" id="user-message" placeholder="Type your message..." autofocus />
+    <button id="send-button">Send</button>
 
-        <div id="chatbot">
-            <h1>Chatbot</h1>
-            <div class="output">
-                <div>Hello there, I'm your chatbot.</div>
-            </div>
-            <p>Type a message to talk to me:</p>
+    <script>
+        const chatContainer = document.getElementById("chat-container");
+        const userMessageInput = document.getElementById("user-message");
+        const sendButton = document.getElementById("send-button");
 
-            <div class="input">
-                <textarea id="chatbot-input" placeholder="Enter your message here..."></textarea> 
-                <button class="submit">Submit</button> 
-            </div>
-        </div>
+        sendButton.addEventListener("click", sendMessage);
+        userMessageInput.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
 
-        <script src="static/app.js">
-            
-        </script>
-    </body>
-</html> 
+        function appendMessage(role, content) {
+            const messageElement = document.createElement("p");
+            messageElement.innerHTML = `<strong>${role}:</strong> ${content}`;
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
 
+        async function sendMessage() {
+            const userMessage = userMessageInput.value;
+            if (userMessage.trim() === "") {
+                return;
+            }
+
+            appendMessage("User", userMessage);
+            userMessageInput.value = "";
+            userMessageInput.focus();
+
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content: userMessage })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const botMessage = data.message;
+                appendMessage("Bot", botMessage);
+            }
+        }
+    </script>
+</body>
+</html>

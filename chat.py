@@ -1,8 +1,14 @@
-def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=temperature, # this is the degree of randomness of the model's output
+import openai
+
+openai.api_key = "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"
+
+def get_completion_from_message(message, model="davinci", temperature=0.5):
+    response = openai.Completion.create(
+        engine=model,
+        prompt=message,
+        temperature=temperature,
+        max_tokens=50,
+        n=1,
+        stop=None
     )
-#   print(str(response.choices[0].message))
-    return response.choices[0].message["content"]
+    return response.choices[0].text
