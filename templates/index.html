@@ -3,11 +3,6 @@
 <head>
     <title>Chat Bot</title>
     <style>
-        #chat-container {
-            height: 550px;
-            overflow:hidden;
-            border: 1px solid #ccc;
-        }
         #user-message {
             margin-bottom: 10px;
         }
@@ -18,14 +13,18 @@
             border:2px solid tomato;
             border-radius: 10px;
             margin-top: 2%;
+            height: 605px;
+            overflow:hidden;
+            border: 1px solid #ccc;
         }
         #user-message{
             flex-grow: 1;
             padding: 2%;
             border-radius: 20px;
             border: 1px solid tomato;
-            margin-left: 2%;
-            width:80%;
+            margin-left: 10%;
+            width:50%;
+            margin-bottom:0%;
         }
         
 header {
@@ -70,17 +69,7 @@ div td {
   color:rgb(9, 9, 9);
   text-align:center;
 }
- #text{
-  margin-left: 10%;
-  margin-right:10%;
-  font-family: cursive;
-  font-size: 18px;
-  align-content: center;
-  border-radius: 15px 15px 0.5px 15px;
-  padding: 10px;
-  color:white;
-  background-color: rgba(236, 90, 28, 0.605);
-}
+
 .container-fluid a{
   border-radius: 20px;
 }
@@ -88,19 +77,9 @@ div td {
   background-color:rgb(199, 26, 26);
   border-radius: 20px;
 }
-#chat-messages {
-  height: calc(100vh - 200px);
-  max-height: calc(100vh - 200px);
-  overflow: auto;
-} 
-#chat-form {
-  display: flex;
-  align-items: center;
-}
-
 button[type="submit"] {
   padding: 2%;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #f7efe5;
   color: rgb(213, 106, 67);
   border: 2px solid tomato;
@@ -111,7 +90,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: tomato;
   color: rgb(253, 250, 249);
   border: 2px solid tomato;
@@ -119,19 +98,6 @@ button[type="submit"]:hover {
   margin-top: -10%;
   font-weight: bold;
 }
-/* Hide the scrollbar */
-#chat-messages::-webkit-scrollbar {
-  width: 0.5em; /* Adjust the width as needed */
-}
-
-#chat-messages::-webkit-scrollbar-track {
-  background-color: transparent; /* Change the color or remove it if not needed */
-}
-
-#chat-messages::-webkit-scrollbar-thumb {
-  background-color: transparent; /* Change the color or remove it if not needed */
-}
-
 .bot-message {
   font-family: "Roboto", sans-serif;
   background-color: #b4624051; /* different light color */
@@ -168,6 +134,7 @@ button[type="submit"]:hover {
 .bot-message img {
   width: 40px; /* adjust the width of the icon */
   height: 40px; /* adjust the height of the icon */
+  border-radius: 50%;
   margin-right: 20px; /* add some margin to separate the icon from the message */
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 400px) {
@@ -183,16 +150,15 @@ button[type="submit"]:hover {
   color: tomato;
   font-weight: bold;
 }
-
     </style>
-    <link rel="stylesheet" href="static/CSS/index.css">
+    <!-- <link rel="stylesheet" href="static/CSS/index.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-      <link rel="stylesheet" type="text/css" href="static/CSS/index.css" />
+      <!-- <link rel="stylesheet" type="text/css" href="static/CSS/index.css" /> -->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
+      
 </head>
-<body>
+<body style="background-color: peachpuff;">
     <section id="nav-bar">
         <nav class="navbar navbar-expand-lg navbar-light " style="background-color: hsla(13, 57%, 45%, 0.635);">
           <div class="container-fluid">
@@ -219,11 +185,14 @@ button[type="submit"]:hover {
         <div class="container">
           <div class="row">
             <div class="col">
-              <div id="chat-container"></div>
+              <div id="chat-container"><div class="main-title">Welcome to DosaBOT</div></div>
               <input type="text" id="user-message" placeholder="Type your message..." autofocus />
               <button id="send-button" type="submit"><i class="fa fa-paper-plane fa-lg"></i></button>
-              <button type="submit"><i class="fa fa-microphone fa-lg"></i></button>
+              <button type="submit" id="startButton"><i class="fa fa-microphone fa-lg"></i></button>
+              <button type="submit" id="stopButton"><i class="fa fa-microphone-slash fa-lg" style="--fa-primary-color: #ffffff; --fa-secondary-color: #ffffff;"></i></button>
+              <div id="result"></div>
             </div>
+            
             <div class="col-md-6 text-center">
               <div id="table-content" align="center">
                 <h1 style="background-color: rgba(255, 99, 71, 0.619); margin-top: 2%; color: white; width: 25%; border-radius: 10px;">Menu</h1>
@@ -242,100 +211,100 @@ button[type="submit"]:hover {
                         <tbody>
                           <tr>
                             <td>Masala dosa</td>
-                            <td>40</td>
-                            <td>25</td>
+                            <td>40 Rs/-</td>
+                            <td>25 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Onion dosa</td>
-                            <td>35</td>
-                            <td>25</td>
+                            <td>35 Rs/-</td>
+                            <td>25 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Plain dosa</td>
-                            <td>25</td>
-                            <td>20</td>
+                            <td>25 Rs/-</td>
+                            <td>20 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Ravva dosa</td>
-                            <td>35</td>
-                            <td>25</td>
+                            <td>35 Rs/-</td>
+                            <td>25 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Onion Ravva dosa</td>
-                            <td>40</td>
-                            <td>30</td>
+                            <td>40 Rs/-</td>
+                            <td>30 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Egg dosa</td>
-                            <td>45</td>
-                            <td>30</td>
+                            <td>45 Rs/-</td>
+                            <td>30 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Pesarattu</td>
-                            <td>35</td>
-                            <td>25</td>
+                            <td>35 Rs/-</td>
+                            <td>25 Rs/-</td>
                           </tr>
                           <tr>
                             <td colspan="3" style="background-color: rgba(199, 99, 81, 0.967);color:white;font-weight: 500"><strong>Drinks:</strong></td>
                           </tr>
                           <tr>
                             <td>Bottled water</td>
-                            <td>20</td>
-                            <td>10</td>
+                            <td>20 Rs/-</td>
+                            <td>10 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Sprite</td>
-                            <td>30</td>
-                            <td>10</td>
+                            <td>30 Rs/-</td>
+                            <td>10 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Thumps up</td>
-                            <td>30</td>
-                            <td>10</td>
+                            <td>30 Rs/-</td>
+                            <td>10 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Slice</td>
-                            <td>30</td>
-                            <td>10</td>
+                            <td>30 Rs/-</td>
+                            <td>10 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Maaza</td>
-                            <td>30</td>
-                            <td>10</td>
+                            <td>30 Rs/-</td>
+                            <td>10 Rs/-</td>
                           </tr>
                           <tr>
                             <td colspan="3" style="background-color: rgba(199, 99, 81, 0.967);color:white;font-weight: 500"><strong>Types of Tea</strong></td>
                           </tr>
                           <tr>
                             <td>Normal Tea</td>
-                            <td colspan="2">10</td>
+                            <td colspan="2">10 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Special Tea</td>
-                            <td colspan="2">20</td>
+                            <td colspan="2">20 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Elachi Tea</td>
-                            <td colspan="2">15</td>
+                            <td colspan="2">15 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Green Tea</td>
-                            <td colspan="2">15</td>
+                            <td colspan="2">15 Rs/-</td>
                           </tr>
                           <tr>
                             <td colspan="3" style="background-color: rgba(199, 99, 81, 0.967);color:white; font-weight: 500;"><strong>Types of Coffee</strong></td>
                           </tr>
                           <tr>
                             <td>Black coffee</td>
-                            <td colspan="2">20</td>
+                            <td colspan="2">20 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Normal coffee</td>
-                            <td colspan="2">15</td>
+                            <td colspan="2">15 Rs/-</td>
                           </tr>
                           <tr>
                             <td>Filtered coffee</td>
-                            <td colspan="2">30</td>
+                            <td colspan="2">30 Rs/-</td>
                           </tr>
                         </tbody>
                 </table>
@@ -346,51 +315,222 @@ button[type="submit"]:hover {
       </section>      
     
       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
-      <script src="static/JS/app.js"></script>
+      
     
       <script >
-        const chatContainer = document.getElementById("chat-container");
-        const userMessageInput = document.getElementById("user-message");
-        const sendButton = document.getElementById("send-button");
+        
+//         //code to work with voice input
 
-        sendButton.addEventListener("click", sendMessage);
-        userMessageInput.addEventListener("keydown", function (event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
+        let resultDiv = document.getElementById('result');
+        let textInput = document.getElementById('textInput');
+        let sendButton = document.getElementById('sendButton');
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+
+
+        document.getElementById('startButton').addEventListener('click', () => {
+            recognition.start();
         });
 
-        function appendMessage(role, content) {
-            const messageElement = document.createElement("p");
-            messageElement.innerHTML = `<strong>${role}:</strong> ${content}`;
-            chatContainer.appendChild(messageElement);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
+        document.getElementById('stopButton').addEventListener('click', () => {
+            recognition.stop();
+        });
 
-        async function sendMessage() {
-            const userMessage = userMessageInput.value;
-            if (userMessage.trim() === "") {
-                return;
-            }
+        recognition.onresult = (event) => {
+            const result = event.results[event.results.length - 1][0].transcript;
+            resultDiv.textContent = result;
+            sendVoiceData(result);
+        };
 
-            appendMessage("User", userMessage);
-            userMessageInput.value = "";
-            userMessageInput.focus();
+        
+        
 
-            const response = await fetch("/chat", {
-                method: "POST",
+        function sendVoiceData(voiceInput) {
+            fetch('/process_voice', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ content: userMessage })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                const botMessage = data.message;
-                appendMessage("Bot", botMessage);
-            }
+                body: JSON.stringify({ input: voiceInput })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Server response:', result);
+                    appendMessage('user', voiceInput);
+                    appendMessage('model', result.message);
+                })
+                .catch(error => {
+                    console.error('Error processing voice input:', error);
+                });
         }
+
+        function appendMessage(sender, message) {
+            const messageContainer = document.getElementById('chat-container');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'model-message');
+            messageElement.textContent = sender === 'user' ? `User: ${message}` : `Model: ${message}`;
+            messageContainer.appendChild(messageElement);
+        }
+
+
+
+//         const chatContainer = document.getElementById("chat-container");
+//         const userMessageInput = document.getElementById("user-message");
+//         const sendButton = document.getElementById("send-button");
+
+        
+//         sendButton.addEventListener("click", sendMessage);
+//         userMessageInput.addEventListener("keydown", function (event) {
+//             if (event.key === "Enter") {
+//                 sendMessage();
+//             }
+//         });
+
+
+
+//         function appendMessage(role, content) {
+//     const messageElement = document.createElement("div");
+//     messageElement.classList.add("message");
+    
+//     if (role === "User") {
+//         messageElement.classList.add("user-message");
+//         messageElement.innerHTML = `
+//             <img src="https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png" alt="user icon">
+//             <span>${content}</span>
+//         `;
+//     } else if (role === "Bot") {
+//         messageElement.classList.add("bot-message");
+//         messageElement.innerHTML = `
+//             <img src="https://m.media-amazon.com/images/I/61HmveTPTsL.jpg" alt="bot icon">
+//             <span>${content}</span>
+//         `;
+//     }
+    
+//     chatContainer.appendChild(messageElement);
+//     chatContainer.scrollTop = chatContainer.scrollHeight;
+// }
+
+        
+
+        
+
+//         async function sendMessage() {
+//             const userMessage = userMessageInput.value;
+//             if (userMessage.trim() === "") {
+//                 return;
+//             }
+
+//             appendMessage("User", userMessage);
+//             userMessageInput.value = "";
+//             userMessageInput.focus();
+
+//             const response = await fetch("/chat", {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json"
+//                 },
+//                 body: JSON.stringify({ content: userMessage })
+//             });
+
+//             if (response.ok) {
+//                 const data = await response.json();
+//                 const botMessage = data.message;
+//                 appendMessage("Bot", botMessage);
+//             }
+//         }
+
+        
+// let resultDiv = document.getElementById('result');
+// let textInput = document.getElementById('textInput');
+// let sendButton = document.getElementById('sendButton');
+
+// const recognition = new webkitSpeechRecognition();
+// recognition.continuous = true;
+
+// document.getElementById('startButton').addEventListener('click', () => {
+//     recognition.start();
+// });
+
+// document.getElementById('stopButton').addEventListener('click', () => {
+//     recognition.stop();
+// });
+
+// recognition.onresult = (event) => {
+//     const result = event.results[event.results.length - 1][0].transcript;
+//     resultDiv.textContent = result;
+//     sendInput(result);
+// };
+
+// sendButton.addEventListener('click', () => {
+//     const input = textInput.value;
+//     sendInput(input);
+// });
+
+// function sendInput(input) {
+//     if (input.trim() === '') {
+//         return;
+//     }
+
+//     if (input.startsWith('/voice')) {
+//         const voiceCommand = input.slice(6).trim();
+//         startVoiceRecognition(voiceCommand);
+//     } else {
+//         sendTextData(input);
+//     }
+    
+//     textInput.value = '';
+//     textInput.focus();
+// }
+
+// function startVoiceRecognition(voiceCommand) {
+//     resultDiv.textContent = 'Listening...';
+
+//     recognition.start();
+
+//     recognition.onend = () => {
+//         const recognizedText = resultDiv.textContent.trim();
+//         resultDiv.textContent = '';
+
+//         if (recognizedText !== '') {
+//             const message = `You said: "${recognizedText}"`;
+//             appendMessage('user', message);
+//             sendTextData(voiceCommand);
+//         }
+//     };
+// }
+
+// function sendTextData(textInput) {
+//     fetch('/chat', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ input: textInput })
+//     })
+//     .then(response => response.json())
+//     .then(result => {
+//         console.log('Server response:', result);
+//         appendMessage('user', textInput);
+//         appendMessage('model', result.message);
+//     })
+//     .catch(error => {
+//         console.error('Error processing text input:', error);
+//     });
+// }
+
+// function appendMessage(sender, message) {
+//     const messageContainer = document.getElementById('chat-container');
+//     const messageElement = document.createElement('div');
+//     messageElement.classList.add(sender === 'user' ? 'user-message' : 'model-message');
+//     messageElement.textContent = sender === 'user' ? `User: ${message}` : `Model: ${message}`;
+//     messageContainer.appendChild(messageElement);
+// }
+
+        
+
+        
+        
     </script>
 </body>
 </html>
