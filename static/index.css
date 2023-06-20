@@ -1,0 +1,10 @@
+
+        #chat-container {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        #user-message {
+            margin-bottom: 10px;
+        }
