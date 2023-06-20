@@ -2,7 +2,6 @@ import openai
 
 openai.api_key = ""
 
-
 context = [ {'role':'system', 'content':"""
 You are OrderBot, an automated service to collect orders for a street dosa. \
 You first greet the customer, then collects the order, \
