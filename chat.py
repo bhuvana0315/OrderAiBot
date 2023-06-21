@@ -1,6 +1,18 @@
 import openai
+# openai.api_key = ""
 
-openai.api_key = ""
+from dotenv import load_dotenv
+
+load_dotenv()
+import os
+
+api_key = os.getenv("API_KEY")
+openai.api_key = api_key
+
+
+# Rest of your code using the OpenAI library
+
+
 
 context = [ {'role':'system', 'content':"""
 You are OrderBot, an automated service to collect orders for a street dosa. \
