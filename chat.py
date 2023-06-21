@@ -56,17 +56,6 @@ Slice 10.00,30.00,50.00 \
 
 """} ]  # accumulate messages
 
-# def get_completion_from_message(message, model="gpt-3.5-turbo", temperature=0.5):
-#     response = openai.ChatCompletion.create(
-#         model=model,
-#         messages=[
-#             {"role": "system", "content": "You are a helpful assistant."},
-#             {"role": "user", "content": message}
-#         ],
-#         temperature=temperature
-#     )
-#     return response.choices[0].message.content
-
 def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
     response = openai.ChatCompletion.create(
         model=model,
