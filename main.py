@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+from fastapi.staticfiles import StaticFiles
 from chat import get_completion_from_messages,collect_messages_text
 
 app = FastAPI()
+#app.mount("/static", StaticFiles(directory=static), name="static")
 templates = Jinja2Templates(directory="templates")
 
 class Message(BaseModel):

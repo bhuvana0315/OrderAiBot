@@ -1,17 +1,21 @@
 import openai
-# openai.api_key = ""
+from google.cloud import secretmanager
 
-from dotenv import load_dotenv
+# Create a client
+client = secretmanager.SecretManagerServiceClient()
 
-load_dotenv()
-import os
+# Specify the name of the secret
+secret_name = "projects/569816125116/secrets/Botfastapi/versions/1"
 
-api_key = os.getenv("API_KEY")
+# Access the secret
+response = client.access_secret_version(request={"name": secret_name})
+api_key = response.payload.data.decode("UTF-8")
+
+# Set the OpenAI API key
 openai.api_key = api_key
 
-
+# Use the OpenAI library
 # Rest of your code using the OpenAI library
-
 
 
 context = [ {'role':'system', 'content':"""
