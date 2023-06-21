@@ -1,22 +1,13 @@
 import openai
-from google.cloud import secretmanager
+import os
+from dotenv import load_dotenv
 
-# Create a client
-client = secretmanager.SecretManagerServiceClient()
+load_dotenv()
 
-# Specify the name of the secret
-secret_name = "projects/569816125116/secrets/Botfastapi/versions/1"
-
-# Access the secret
-response = client.access_secret_version(request={"name": secret_name})
-api_key = response.payload.data.decode("UTF-8")
-
-# Set the OpenAI API key
+api_key = os.getenv("API_KEY")
 openai.api_key = api_key
 
-# Use the OpenAI library
 # Rest of your code using the OpenAI library
-
 
 context = [ {'role':'system', 'content':"""
 You are OrderBot, an automated service to collect orders for a street dosa. \
