@@ -39,6 +39,7 @@ function sendVoiceData(voiceInput) {
         .then(result => {
             console.log("Server response:", result);
             appendMessage("Bot", result.message);
+            speakText(result.message);
         })
         .catch(error => {
             console.error("Error processing voice input:", error);
@@ -89,5 +90,11 @@ async function sendMessage() {
         const data = await response.json();
         const botMessage = data.message;
         appendMessage("Bot", botMessage);
+        speakText(botMessage);
     }
+}
+
+function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(utterance);
 }
