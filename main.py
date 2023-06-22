@@ -24,12 +24,12 @@ async def chat(message: Message):
 
 @app.post("/process_voice")
 async def process_voice(voice_input: dict):
-    print(voice_input)
+    # print(voice_input)
     text = voice_input.get('input')
     # Process the voice input as needed
-    print("Voice input:", text)
+    # print("Voice input:", text)
     response = collect_messages_text(text)
-    print(response)
+    # print(response)
     return {"message": response}
 
 if __name__ == "__main__":
