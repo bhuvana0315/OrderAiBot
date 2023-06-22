@@ -4,24 +4,26 @@
 #nav-bar{
   position:sticky;
 }
-#chat-container{
-  width:100%; 
-  background-image:linear-gradient(to right,rgba(237, 155, 125, 0.789),rgba(237, 155, 125, 0.258));
+#chat-container {
+  width: 100%;
+  background-image: linear-gradient(to right, rgba(237, 155, 125, 0.789), rgba(237, 155, 125, 0.258));
   padding: 5px;
-  border:2px solid tomato;
+  border: 2px solid tomato;
   border-radius: 10px;
   margin-top: 2%;
   height: 600px;
   border: 1px solid #ccc;
+  overflow-y:scroll; /* Add overflow-y property to enable vertical scrolling */
 }
-#user-message{
+
+/* Adjust the width of the user input */
+#user-message {
   flex-grow: 1;
   padding: 2%;
   border-radius: 20px;
   border: 2px solid tomato;
-  /* margin-left: 10%; */
-  width:50%;
-  margin-bottom:0%;
+  width: 70%; /* Adjust the width as needed */
+  margin-bottom: 10px;
 }
 
 header {
@@ -85,47 +87,59 @@ font-size: 1rem;
 margin-top: -10%;
 font-weight: bold;
 }
-.bot-message {
-font-family: "Roboto", sans-serif;
-background-color: #b4624051; /* different light color */
-text-align: justify; /* keep it right-aligned */
-padding: 10px; /* added padding */
-margin-top: 6%; /* added margin-top to create a gap */
-margin-bottom: 2%;
-margin-right: 10%;
-display: flex;
-color:white;
-margin-left:5%;
-float:left;
-width:fit-content;
-align-items: center;
-font-style: italic;
-border-radius: 20px 15px 20px 0px;
+
+.user-message{
+  font-family: "Nunito", sans-serif;
+  background-color: rgba(216, 46, 12, 0.542);
+  /* light color */
+  text-align: left;
+  /* changed text align to left */
+  padding: 10px;
+  /* added padding */
+  display: flex;
+  color: white;
+  width: fit-content;
+  float: right;
+  margin-left:5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 5%;
+  align-items: center;
+  font-style: italic;
+  border-radius: 20px 15px 0px 20px;
+  word-wrap: break-word; /* Add word-wrap property to wrap long messages */
 }
 
-.user-message {
-font-family: "Nunito", sans-serif;
-background-color:rgba(216, 46, 12, 0.542); /* light color */
-text-align: left; /* changed text align to left */
-padding: 10px; /* added padding */
-display: flex;
-color:white;
-width:fit-content;
-float:right;
-margin-top: 2%;
-margin-bottom: 2%;
-margin-right: 5%;
-align-items: center;
-font-style: italic;
-border-radius: 20px 15px 0px 20px;
+.bot-message {
+  font-family: "Nunito", sans-serif;
+  background-color: rgba(224, 142, 126, 0.647);
+  /* light color */
+  text-align: left;
+  /* changed text align to left */
+  padding: 10px;
+  /* added padding */
+  display: flex;
+  color: white;
+  width: fit-content;
+  float: right;
+  margin-left:5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 5%;
+  align-items: center;
+  font-style: italic;
+  border-radius: 20px 15px 0px 20px;
+  word-wrap: break-word; /* Add word-wrap property to wrap long messages */
 }
+
 .user-message img,
 .bot-message img {
-width: 40px; /* adjust the width of the icon */
-height: 40px; /* adjust the height of the icon */
-border-radius: 50%;
-margin-right: 20px; /* add some margin to separate the icon from the message */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 20px;
 }
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 400px) {
 #chat-window {
 width: 90%;
