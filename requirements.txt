@@ -3,4 +3,3 @@ uvicorn
 openai
 jinja2
 python-dotenv
-google-cloud-secret-manager

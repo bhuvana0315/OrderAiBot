@@ -96,11 +96,9 @@ font-weight: bold;
   /* changed text align to left */
   padding: 10px;
   /* added padding */
-  display: flex;
   color: white;
   width: fit-content;
   float: right;
-  margin-left:5%;
   margin-top: 2%;
   margin-bottom: 2%;
   margin-right: 5%;
@@ -118,14 +116,13 @@ font-weight: bold;
   /* changed text align to left */
   padding: 10px;
   /* added padding */
-  display: flex;
   color: white;
+  float:left;
   width: fit-content;
-  float: right;
-  margin-left:5%;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-left: 5%;
+  margin-top: 5%;
   margin-right: 5%;
+  margin-bottom: 2%;
   align-items: center;
   font-style: italic;
   border-radius: 20px 15px 0px 20px;
