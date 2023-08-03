@@ -49,11 +49,11 @@ Normal Coffee: 15.00 \
 Filtered Coffee: 30.00 \
 Black Coffee :20.00\
 cool drinks: \
-Sprite 10.00,30.00,50.00 \
-Thums Up 10.00,30.00,50.00 \
-Pepsi 10.00,30.00,50.00 \
-Maaza 10.00,30.00,50.00 \
-Slice 10.00,30.00,50.00 \
+Sprite 10.00,30.00 \
+Thums Up 10.00,30.00\
+Pepsi 10.00,30.00\
+Maaza 10.00,30.00 \
+Slice 10.00,30.00 \
 
 
 """} ]  # accumulate messages
@@ -84,7 +84,7 @@ def store_order_summary():
     print(response)
     with open('order_summary.json', 'w') as json_file:
         json.dump(response, json_file)
-    user_phone_number='+917386785251'
+    user_phone_number='+916302211930'
     send_whatsapp_message(user_phone_number, response)
 
 def send_whatsapp_message(to, body):
@@ -107,11 +107,6 @@ def send_whatsapp_message(to, body):
         print(message.sid)
     except Exception as e:
         print('Error sending WhatsApp message:', str(e))
-
-
-
-
-
 
 # import os
 # from dotenv import load_dotenv
