@@ -22,39 +22,55 @@ Make sure to clarify all options, extras and sizes uniquely \
 identify the item from the menu.\
 If it's a delivery, you ask for an address. \
 Finally you collect the payment for all the orders.\
-Make sure that the payment is made by the customer. \
 You should respond only to take the orders and for all other questions you should not respond since you are an orderbot. \
 You respond in a short, very conversational friendly style. \
 You should take orders only for the items that aree included in the following menu. \
 The menu includes \
 
-Masala dosa  40.00 \
-Onion dosa   25.00 \
-Plain dosa   20.00 \
-Ravva dosa   20.00 \
-Onion Ravva dosa 30.00 \
-Egg dosa 45.00
-pesarattu    35.00 \
-
-Drinks: \
-bottled water 30.00 \
-Tea  
-Tea:\
-Normal Tea :10.00\
-Special Tea: 20.00 \
-Ilachi Tea: 15.00\
-Green Tea : 15.00 \
-Coffee:\
-Normal Coffee: 15.00 \
-Filtered Coffee: 30.00 \
-Black Coffee :20.00\
-cool drinks: \
-Sprite 10.00,30.00 \
-Thums Up 10.00,30.00\
-Pepsi 10.00,30.00\
-Maaza 10.00,30.00 \
-Slice 10.00,30.00 \
-
+Plain dosa: 60/-
+Onion dosa: 70/-
+Onion butter dosa: 70/-
+Ghee dosa: 70/-
+Karam dosa: 70/-
+Avakaya dosa: 70/-
+Paneer dosa: 80/-
+Ghee karam dosa: 80/-
+70mm dosa: 110/-
+Ghee karam 70mm dosa: 110/-
+Masala Dosa: 70/-
+Onion Masala Dosa: 80/-
+Butter Masala Dosa: 90/-
+Paneer Masala Dosa: 90/-
+Avakaya Masala Dosa: 90/-
+Cheese Masala Dosa: 100/-
+Ghee Karam Masala Dosa: 100/-
+Schezwan Dosa: 180/-
+Butter Schezwan Dosa: 180/-
+Paneer Schezwan Dosa: 180/-
+Cheese Schezwan Dosa: 180/-
+Ravva Dosa: 60/-
+Onion Ravva Dosa: 70/-
+Ravva Masala Dosa: 70/-
+Ghee Ravva Dosa: 70/-
+Onion Ravva Masala Dosa: 80/-
+Cheese Ravva Dosa: 80/-
+Cheese Ravva Masala Dosa: 90/-
+Ravva Upma Dosa: 90/-
+Onion Ghee Dosa: 80/-
+Butter Dosa: 70/-
+Steam Dosa: 90/-
+Set Dosa: 100/-
+Uthappam: 60/-
+Onion Uthappam: 70/-
+Mixed Uthappam: 90/-
+Pesaraptu: 60/-
+Onion Pesaraptu: 70/-
+Mixed Pesaraptu: 90/-
+Ghee Mila Pesarattu: 110/-
+Ghee Mila Dosa: 110/-
+Ghee Paneer Dosa: 130/-
+Cheese Paneer Dosa: 130/-
+Butter Paneer Dosa: 130/-
 
 """} ]  # accumulate messages
 
@@ -68,7 +84,10 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
     return response.choices[0].message["content"]
 
 def collect_messages_text(msg):
-    prompt = msg
+    prompt = msg #.split(' ')
+    print(prompt)
+    # word='pickup'
+    # if(word in prompt): 
     if(prompt=="pickup" or prompt=="delivery"):
         store_order_summary()
     context.append({'role':'user', 'content':f"{prompt}"})
@@ -84,15 +103,14 @@ def store_order_summary():
     print(response)
     with open('order_summary.json', 'w') as json_file:
         json.dump(response, json_file)
-    user_phone_number='+916302211930'
+    user_phone_number='+919347665827'
     send_whatsapp_message(user_phone_number, response)
 
 def send_whatsapp_message(to, body):
     # Twilio credentials
     twilio_account_sid = os.getenv("TWILIO_ACCOUNT_SID")
     twilio_auth_token = os.getenv("TWILIO_AUTH_TOKEN")
-    twilio_whatsapp_number = os.getenv("TWILIO_WHATSAPP_NUMBER")
-    # twilio_whatsapp_number = 'whatsapp:+14155238886'  # Twilio's sandbox WhatsApp number
+    twilio_whatsapp_number = os.getenv("TWILIO_WHATSAPP_NUMBER") # Twilio's sandbox WhatsApp number
 
     client = Client(twilio_account_sid, twilio_auth_token)
 
@@ -107,112 +125,3 @@ def send_whatsapp_message(to, body):
         print(message.sid)
     except Exception as e:
         print('Error sending WhatsApp message:', str(e))
-
-# import os
-# from dotenv import load_dotenv
-# from twilio.rest import Client
-
-# load_dotenv()
-
-# # Rest of your code using the OpenAI library
-
-# def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
-#     response = openai.ChatCompletion.create(
-#         model=model,
-#         messages=messages,
-#         temperature=temperature,
-#     )
-#     return response.choices[0].message["content"]
-
-
-# def send_whatsapp_message(to, body):
-#     account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-#     auth_token = os.getenv("TWILIO_AUTH_TOKEN")
-#     twilio_whatsapp_number = os.getenv("TWILIO_WHATSAPP_NUMBER")
-
-#     client = Client(account_sid, auth_token)
-
-#     try:
-#         message = client.messages.create(
-#             from_=twilio_whatsapp_number,
-#             to='whatsapp:' + to,
-#             body=body
-#         )
-
-#         print('WhatsApp message sent successfully.')
-#         print(message.sid)
-#     except Exception as e:
-#         print('Error sending WhatsApp message:', str(e))
-
-
-# # d
-
-# context = [{'role': 'system', 'content': """
-#         You are OrderBot, an automated service to collect orders for a street dosa. \
-#         Your first question after greeting the customer is, "How may I help you today?" \
-#         You collect the order, and then ask if it's a pickup or delivery. \
-#         You wait to collect the entire order, then summarize it and check for the final total. \
-#         You ask if the customer wants to add anything else. \
-#         Make sure to clarify all options, extras, and sizes and uniquely identify the item from the menu. \
-#         If it's a delivery, you ask for an address. \
-#         Finally, you collect the payment for all the orders. \
-#         You should respond only to take orders, and for all other questions, you should not respond since you are an orderbot. \
-#         You respond in a short, very conversational, friendly style. \
-#         You should take orders only for the items that are included in the following menu. \
-#         The menu includes: \
-
-#         Masala dosa  40.00 \
-#         Onion dosa   25.00 \
-#         Plain dosa   20.00 \
-#         Ravva dosa   20.00 \
-#         Onion Ravva dosa 30.00 \
-#         Egg dosa 45.00 \
-#         Pesarattu    35.00 \
-
-#         Drinks: \
-#         Bottled water 30.00 \
-#         Tea: \
-#         Normal Tea : 10.00 \
-#         Special Tea: 20.00 \
-#         Elachi Tea: 15.00 \
-#         Green Tea : 15.00 \
-#         Coffee: \
-#         Normal Coffee: 15.00 \
-#         Filtered Coffee: 30.00 \
-#         Black Coffee : 20.00 \
-#         Cool drinks: \
-#         Sprite 10.00, 30.00, 50.00 \
-#         Thums Up 10.00, 30.00, 50.00 \
-#         Pepsi 10.00, 30.00, 50.00 \
-#         Maaza 10.00, 30.00, 50.00 \
-#         Slice 10.00, 30.00, 50.00 \
-#         """}]
-
-# def collect_messages_text(msg, user_phone_number=None):
-#     # Check if the user provided their phone number in the message
-#     if user_phone_number is None:
-#         user_phone_number = extract_phone_number_from_message(msg)
-
-#     prompt = msg
-#     context.append({'role': 'user', 'content': f"{prompt}"})
-#     response = get_completion_from_messages(context)
-#     context.append({'role': 'assistant', 'content': f"{response}"})
-
-#     # Send the response as a WhatsApp message
-#     if user_phone_number:
-#         send_whatsapp_message(user_phone_number, response)
-
-#     return response
-
-# import re
-
-# def extract_phone_number_from_message(msg):
-#     # Use regular expression to find a phone number pattern
-#     phone_number_pattern = r'\+?\d{1,3}[-.\s]?\(?\d{1,5}\)?[-.\s]?\d{1,5}[-.\s]?\d{1,5}[-.\s]?\d{1,9}'
-#     matches = re.findall(phone_number_pattern, msg)
-
-#     # Return the first phone number found, if any
-#     if matches:
-#         return matches[0]
-
-#     return None

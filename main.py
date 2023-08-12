@@ -18,7 +18,6 @@ def home(request: Request):
 @app.post("/chat")
 async def chat(message: Message):
     user_message = message.content
-    # user_phone_number = "RECEIVER_PHONE_NUMBER_WITH_COUNTRY_CODE"
     
     response = collect_messages_text(user_message)
 
