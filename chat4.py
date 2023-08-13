@@ -27,54 +27,15 @@ You respond in a short, very conversational friendly style. \
 You should take orders only for the items that aree included in the following menu. \
 The menu includes \
 
-Plain dosa: 60/-
-Onion dosa: 70/-
-Onion butter dosa: 70/-
-Ghee dosa: 70/-
-Karam dosa: 70/-
-Avakaya dosa: 70/-
-Paneer dosa: 80/-
-Ghee karam dosa: 80/-
-70mm dosa: 110/-
-Ghee karam 70mm dosa: 110/-
-Masala Dosa: 70/-
-Onion Masala Dosa: 80/-
-Butter Masala Dosa: 90/-
-Paneer Masala Dosa: 90/-
-Avakaya Masala Dosa: 90/-
-Cheese Masala Dosa: 100/-
-Ghee Karam Masala Dosa: 100/-
-Schezwan Dosa: 180/-
-Butter Schezwan Dosa: 180/-
-Paneer Schezwan Dosa: 180/-
-Cheese Schezwan Dosa: 180/-
-Ravva Dosa: 60/-
-Onion Ravva Dosa: 70/-
-Ravva Masala Dosa: 70/-
-Ghee Ravva Dosa: 70/-
-Onion Ravva Masala Dosa: 80/-
-Cheese Ravva Dosa: 80/-
-Cheese Ravva Masala Dosa: 90/-
-Ravva Upma Dosa: 90/-
-Onion Ghee Dosa: 80/-
-Butter Dosa: 70/-
-Steam Dosa: 90/-
-Set Dosa: 100/-
-Uthappam: 60/-
-Onion Uthappam: 70/-
-Mixed Uthappam: 90/-
-Pesaraptu: 60/-
-Onion Pesaraptu: 70/-
-Mixed Pesaraptu: 90/-
-Ghee Mila Pesarattu: 110/-
-Ghee Mila Dosa: 110/-
-Ghee Paneer Dosa: 130/-
-Cheese Paneer Dosa: 130/-
-Butter Paneer Dosa: 130/-
+veg fried rice 80
+egg fried rice 110
+chicken friedd rice 150
+
+
 
 """} ]  # accumulate messages
 
-def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
+def get_completion_from_messages4(messages, model="gpt-3.5-turbo", temperature=0):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
@@ -83,7 +44,7 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
 #   print(str(response.choices[0].message))
     return response.choices[0].message["content"]
 
-def collect_messages_text(msg):
+def collect_messages_text4(msg):
     prompt = msg #.split(' ')
     print(prompt)
     # word='pickup'
@@ -91,7 +52,7 @@ def collect_messages_text(msg):
     if(prompt=="pickup" or prompt=="delivery"):
         store_order_summary()
     context.append({'role':'user', 'content':f"{prompt}"})
-    response = get_completion_from_messages(context) 
+    response = get_completion_from_messages4(context) 
     context.append({'role':'assistant', 'content':f"{response}"})
     return response
 

@@ -78,7 +78,7 @@ async function sendMessage() {
     userMessageInput.value = "";
     userMessageInput.focus();
 
-    const response = await fetch("/chat", {
+    const response = await fetch("/chat2", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
